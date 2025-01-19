@@ -1,0 +1,272 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+      "/": {
+        "get": {
+          "operationId": "AppController_getHello",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "App"
+          ]
+        }
+      },
+      "/events": {
+        "post": {
+          "operationId": "EventController_createEvent",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEventDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "The event has been successfully created.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "summary": "Create a new event",
+          "tags": [
+            "events"
+          ]
+        },
+        "get": {
+          "operationId": "EventController_getAllEvents",
+          "parameters": [
+            {
+              "name": "skip",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "take",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "category",
+              "required": false,
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Return all events.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Event"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "summary": "Get all events",
+          "tags": [
+            "events"
+          ]
+        }
+      },
+      "/events/{id}": {
+        "get": {
+          "operationId": "EventController_getEventById",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Return the event.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "summary": "Get an event by id",
+          "tags": [
+            "events"
+          ]
+        },
+        "put": {
+          "operationId": "EventController_updateEvent",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateEventDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "The event has been successfully updated.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "summary": "Update an event",
+          "tags": [
+            "events"
+          ]
+        },
+        "delete": {
+          "operationId": "EventController_deleteEvent",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The event has been successfully deleted.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          },
+          "summary": "Delete an event",
+          "tags": [
+            "events"
+          ]
+        }
+      }
+    },
+    "info": {
+      "title": "Event Management API",
+      "description": "The Event Management API description",
+      "version": "1.0",
+      "contact": {
+  
+      }
+    },
+    "tags": [
+      {
+        "name": "events",
+        "description": ""
+      }
+    ],
+    "servers": [],
+    "components": {
+      "schemas": {
+        "CreateEventDto": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The title of the event"
+            },
+            "description": {
+              "type": "string",
+              "description": "The description of the event"
+            },
+            "date": {
+              "format": "date-time",
+              "type": "string",
+              "description": "The date of the event (ISO 8601 format)"
+            },
+            "category": {
+              "type": "string",
+              "description": "The category of the event"
+            }
+          },
+          "required": [
+            "title",
+            "date",
+            "category"
+          ]
+        },
+        "Event": {
+          "type": "object",
+          "properties": {
+  
+          }
+        },
+        "UpdateEventDto": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The title of the event"
+            },
+            "description": {
+              "type": "string",
+              "description": "The description of the event"
+            },
+            "date": {
+              "format": "date-time",
+              "type": "string",
+              "description": "The date of the event (ISO 8601 format)"
+            },
+            "category": {
+              "type": "string",
+              "description": "The category of the event"
+            }
+          }
+        }
+      }
+    }
+  }
